@@ -72,6 +72,9 @@ module.exports = {
       }
     }
   },
+  router: {
+    base: '/pdf-converter/'
+  },
   /*
   ** Build configuration
   */
@@ -79,12 +82,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, { isDev, isClient }) {
-      if (!isDev) {
-        // relative links, please.
-        config.output.publicPath = './_nuxt/'
-      }
-      return config;
+    extend(config) {
     }
   }
 }
