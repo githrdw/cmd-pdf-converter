@@ -2,7 +2,7 @@
   v-row(style="height:100%").align-center.justify-center
     v-col.pa-0(style="height:100%")
       //- v-sheet(v-if="aspectRatio === 'id'")#id Test
-      video#camera(autoplay style="width: 100%;height: 100%")
+      video#camera(autoplay controls style="width: 100%;height: 100%")
       //- video#camera(autoplay)
       #bottom-bar(v-if="cameras.length")
         code {{cameraIx}}
