@@ -2,8 +2,7 @@
   v-row(style="height:100%").align-center.justify-center
     v-col.pa-0(style="height:100%")
       //- v-sheet(v-if="aspectRatio === 'id'")#id Test
-      video#camera(autoplay controls style="width: 100%;height: 100%")
-      //- video#camera(autoplay)
+      video#camera(style="width: 100%;height: 100%")
       #bottom-bar(v-if="cameras.length")
         code {{cameraIx}}
         code {{cameras[cameraIx]["label"]}}
@@ -47,6 +46,7 @@ export default {
             // Avoid using this in new browsers, as it is going away.
             video.src = URL.createObjectURL(stream);
           }
+          video.play()
         })
         .catch(function(err0r) {
           console.log("Something went wrong!", err0r);
@@ -58,8 +58,8 @@ export default {
       const media = navigator.mediaDevices;
       if (this.stream) this.stream.getTracks().forEach(track => track.stop());
       media.enumerateDevices().then(devices => {
-        // this.cameras = devices.filter(device => device.kind === "videoinput");
-        this.cameras = devices;
+        this.cameras = devices.filter(device => device.kind === "videoinput");
+        // this.cameras = devices;
         this.startCamera();
       });
     }
