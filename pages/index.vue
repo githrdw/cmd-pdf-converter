@@ -41,7 +41,12 @@ export default {
         })
         .then(stream => {
           this.stream = stream;
-          video.srcObject = stream;
+          if ("srcObject" in video) {
+            video.srcObject = stream;
+          } else {
+            // Avoid using this in new browsers, as it is going away.
+            video.src = URL.createObjectURL(stream);
+          }
         })
         .catch(function(err0r) {
           console.log("Something went wrong!", err0r);
