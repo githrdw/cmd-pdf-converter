@@ -15,7 +15,6 @@ export default {
   components: {},
   data: () => ({
     aspectRatio: "id",
-    stream: null,
     cameraIx: 0,
     cameras: []
   }),
@@ -30,16 +29,17 @@ export default {
       const { deviceId } = this.cameras[cameraIx];
       console.warn({ deviceId });
       this.cameraIx = cameraIx;
+      if (window.stream) window.stream.getTracks().forEach(track => track.stop());
       navigator.mediaDevices
         .getUserMedia({
           video: {
             deviceId: { exact: deviceId },
-            height: { min: 1024, ideal: 1280, max: 1920 },
-            width: { min: 576, ideal: 720, max: 1080 }
+            height: { ideal: 1280, max: 1920 },
+            width: { ideal: 720, max: 1080 }
           }
         })
         .then(stream => {
-          this.stream = stream;
+          window.stream = stream;
           if ("srcObject" in video) {
             video.srcObject = stream;
           } else {
@@ -56,7 +56,6 @@ export default {
   mounted() {
     if (navigator.mediaDevices.getUserMedia) {
       const media = navigator.mediaDevices;
-      if (this.stream) this.stream.getTracks().forEach(track => track.stop());
       media.enumerateDevices().then(devices => {
         this.cameras = devices.filter(device => device.kind === "videoinput");
         // this.cameras = devices;
@@ -76,8 +75,7 @@ export default {
   width: 100%;
 }
 #camera {
-  /* position: fixed; */
-  background: red;
+  position: fixed;
 }
 #bottom-bar {
   position: fixed;
