@@ -37,9 +37,7 @@ export default {
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            deviceId: { exact: deviceId },
-            height: { ideal: 1280, max: 1920 },
-            width: { ideal: 720, max: 1080 }
+            deviceId: { exact: deviceId }
           }
         })
         .then(stream => {
@@ -79,7 +77,7 @@ export default {
 .full-size {
   width: 100%;
   height: 100%;
-  overflow:hidden;
+  overflow: hidden;
 }
 #camera {
   min-width: 100%;
