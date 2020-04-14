@@ -1,64 +1,47 @@
 <template lang="pug">
-  v-container
+  v-container(style="height:100%")
     v-row
-      v-col
-        h1 Stap 1
-        .sub-title Wat wilt u converteren?
-    v-row
-      v-col(:cols="6" v-for="type in types" :key="type.text")
-        v-card( to="camera")
-          v-card-text {{type.text}}
-    v-row.justify-end
-      v-btn(x-large color="primary" to="camera").mx-3
-        span Doorgaan
-        v-icon(right) mdi-arrow-right
+      v-col(cols=12).text-center
+        h1 Step 2
+        .sub-title What do you want to convert?
+      v-col(cols=12)
+        v-row
+          v-col(:cols="6" v-for="type in types" :key="type.text")
+            v-card(to="camera")
+              v-card-text
+                v-row.justify-space-around
+                  span {{type.text}}
+                  v-icon(small) {{type.icon}}
+      v-bottom-navigation(absolute)
+        v-row.justify-space-between
+          v-btn(text color="primary" to="source").mx-3
+            span Source
+            v-icon(small) mdi-arrow-left
+          v-btn(color="primary" to="camera" disabled).mx-3
+            span Camera
+            v-icon(small) mdi-arrow-right
 </template>
 <script>
 export default {
-  transition(to, from) {
-    if (from.name === "index") {
-      return "slide-left";
-    }
-    if (from.name === "camera") return "slide-right";
-    if (from.name === "content" && to.name === "camera") return "slide-left";
-    else return "slide-right";
-  },
   data: () => ({
     types: [
       {
-        text: "ID-Kaart"
+        text: "ID-Card",
+        icon: "mdi-card-account-details"
       },
       {
-        text: "A4 document"
+        text: "A4 document",
+        icon: "mdi-file-document"
       },
       {
-        text: "Visitekaartje"
+        text: "Businesscard",
+        icon: "mdi-card-account-mail"
       },
       {
-        text: "Foto / anders"
+        text: "Photo / other",
+        icon: "mdi-plus-box-multiple"
       }
     ]
   })
 };
 </script>
-<style>
-.slide-left-leave-active,
-.slide-left-enter-active,
-.slide-right-leave-active,
-.slide-right-enter-active {
-  transition: 0.2s;
-}
-.slide-left-enter {
-  transform: translate(100%, 0);
-}
-.slide-left-leave-to {
-  transform: translate(-100%, 0);
-}
-
-.slide-right-enter {
-  transform: translate(-100%, 0);
-}
-.slide-right-leave-to {
-  transform: translate(100%, 0);
-}
-</style>
