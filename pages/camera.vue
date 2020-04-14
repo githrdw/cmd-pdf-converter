@@ -29,24 +29,30 @@ export default {
     cameraReady: false,
     loading: true
   }),
+  beforeDestroy() {
+    this.stopCamera();
+  },
   methods: {
-    goBack () {
-      this.loading = false
-      this.cameraReady = false
-      setTimeout(() => this.$router.push("content"), 500)
+    goBack() {
+      this.loading = false;
+      this.cameraReady = false;
+      setTimeout(() => this.$router.push("content"), 500);
     },
     switchCamera() {
       let { cameras, cameraIx } = this;
       cameraIx = cameras.length - 1 === cameraIx ? 0 : cameraIx + 1;
       this.startCamera(cameraIx);
     },
+    stopCamera() {
+      if (window.stream)
+        window.stream.getTracks().forEach(track => track.stop());
+    },
     startCamera(cameraIx = 0) {
       const video = document.querySelector("#camera");
       const { deviceId } = this.cameras[cameraIx];
       console.warn(this.cameras[cameraIx]);
       this.cameraIx = cameraIx;
-      if (window.stream)
-        window.stream.getTracks().forEach(track => track.stop());
+      this.stopCamera();
       navigator.mediaDevices
         .getUserMedia({
           video: {
