@@ -2,7 +2,8 @@
   v-sheet(color="primary" style="height:100%" tile dark)
     v-row(style="height:100%").align-center.align-content-center.justify-center.ma-0.text-center
       v-col(cols=12)
-        v-img(:src="image")
+        v-sheet
+          v-img(:src="image")
 </template>
 <script>
 import { mapState } from "vuex";

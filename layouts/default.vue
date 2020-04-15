@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    v-sheet(tile dark color="primary")#title
+    v-sheet(tile dark color="primary" style="width:100%;overflow:hidden")#title
       v-row.pl-4.pr-6
         v-card-title
           n-link(to="/").nolink PDF Converter

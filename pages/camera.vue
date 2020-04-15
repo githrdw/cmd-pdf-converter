@@ -23,7 +23,6 @@ export default {
   components: {},
   layout: "dense",
   data: () => ({
-    aspectRatio: "id",
     cameraIx: 0,
     cameras: [],
     cameraReady: false,
@@ -104,7 +103,6 @@ export default {
       const media = navigator.mediaDevices;
       media.enumerateDevices().then(devices => {
         this.cameras = devices.filter(device => device.kind === "videoinput");
-        // this.cameras = devices;
         this.startCamera();
       });
     }
@@ -112,24 +110,6 @@ export default {
 };
 </script>
 <style>
-@keyframes disappearCloud {
-  0% {
-    max-height: 100%;
-    margin-bottom: -72px;
-    transform: translateY(0);
-  }
-  100% {
-    max-height: 0%;
-    margin-bottom: 0;
-    transform: translateY(-100%);
-  }
-}
-#id {
-  position: absolute;
-  left: 0;
-  padding-top: 63.0607477%;
-  width: 100%;
-}
 #loader {
   position: absolute;
 }
@@ -148,12 +128,5 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-#cloud-disappear img {
-  margin-bottom: -72px;
-}
-#cloud-disappear {
-  margin-bottom: -72px;
-  animation: 1s disappearCloud ease forwards;
 }
 </style>
