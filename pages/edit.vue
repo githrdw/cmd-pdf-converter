@@ -1,27 +1,18 @@
 <template lang="pug">
   v-sheet(color="primary" style="height:100%" tile dark)
     v-row(style="height:100%").align-center.align-content-center.justify-center.ma-0.text-center
-      v-col(cols=12)#loader
-        v-progress-circular(indeterminate size=50)
-          v-icon mdi-image
-        input(v-show="false" type="file" accept="image/*" @change="storeImage")#file-input
       v-col(cols=12)
-        v-btn(outlined @click="openFileInput") Open gallery
-      #bottom-bar
-        v-row.justify-space-between
-          v-btn(icon x-large @click="goBack" dark).ma-5.pa-6
-            v-icon(large color="white") mdi-arrow-left
+        v-img(:src="image")
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   components: {},
   layout: "dense",
   data: () => ({}),
   methods: {
     storeImage(e) {
-      const { files } = e.target;
-      const file = URL.createObjectURL(files[0]);
-      this.$store.commit("file/setImage", file);
+      this.$store.commit("file/setList", e.target.files);
       this.$router.push("edit");
     },
     goBack() {
@@ -30,13 +21,13 @@ export default {
           this.$router.push({ name: "content", query: { source: "gallery" } }),
         500
       );
-    },
-    openFileInput() {
-      document.getElementById("file-input").click();
     }
   },
+  computed: {
+    ...mapState("file", ["image"])
+  },
   mounted() {
-    this.openFileInput();
+    console.warn(this.$store.state.file);
   }
 };
 </script>

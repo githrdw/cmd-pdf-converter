@@ -8,11 +8,12 @@
         v-scale-transition(origin="center center" leave-absolute)
           v-card(v-show="cameraReady").full-size
             video#camera.full-size
+            canvas(v-show="false")#painting
         #bottom-bar(v-if="cameras.length && loading")
           v-row.justify-space-between
             v-btn(icon x-large @click="goBack" dark).ma-5.pa-6
               v-icon(large color="white") mdi-arrow-left
-            v-btn(icon x-large dark).ma-5.pa-6
+            v-btn(icon x-large dark @click="snapshot").ma-5.pa-6
               v-icon(size="56") mdi-radiobox-marked
             v-btn(icon x-large @click="switchCamera" dark).ma-5.pa-6
               v-icon(large) mdi-video-switch
@@ -50,6 +51,17 @@ export default {
       if (window.stream)
         window.stream.getTracks().forEach(track => track.stop());
     },
+    prepareCanvas() {
+      const video = document.querySelector("#camera");
+      const canvas = document.querySelector("#painting");
+      if (!this.cameraReady) {
+        const width = 320;
+        const height = video.videoHeight / (video.videoWidth / width);
+        canvas.setAttribute("width", width);
+        canvas.setAttribute("height", height);
+        this.cameraReady = true;
+      }
+    },
     startCamera(cameraIx = 0) {
       const video = document.querySelector("#camera");
       const { deviceId } = this.cameras[cameraIx];
@@ -70,12 +82,21 @@ export default {
             // Avoid using this in new browsers, as it is going away.
             video.src = URL.createObjectURL(stream);
           }
+          video.addEventListener("canplay", this.prepareCanvas, false);
           video.play();
-          this.cameraReady = true;
         })
         .catch(function(err0r) {
           console.log("Something went wrong!", err0r);
         });
+    },
+    snapshot() {
+      const video = document.querySelector("#camera");
+      const canvas = document.querySelector("#painting");
+      var context = canvas.getContext("2d");
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const file = canvas.toDataURL("image/png");
+      this.$store.commit("file/setImage", file);
+      this.$router.push("edit");
     }
   },
   mounted() {
