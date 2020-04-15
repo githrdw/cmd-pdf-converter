@@ -4,7 +4,7 @@
       v-col(cols=12)#loader
         v-progress-circular(indeterminate size=50)
           v-icon mdi-image
-        input(type="file" v-show="false")#file-input
+        input(v-show="false" type="file" accept="image/*" capture="filesystem")#file-input
       v-col(cols=12)
         v-btn(outlined @click="openFileInput") Open gallery
       #bottom-bar
