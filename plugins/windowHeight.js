@@ -3,5 +3,6 @@ function setDocHeight() {
 };
 
 addEventListener('resize', setDocHeight)
+addEventListener('scroll', setDocHeight)
 addEventListener('orientationchange', setDocHeight)
 document.addEventListener('DOMContentLoaded', setDocHeight, false);

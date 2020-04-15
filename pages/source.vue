@@ -9,7 +9,7 @@
           span {{type.text}}
           v-icon(right) {{type.icon}}
     v-bottom-navigation(absolute)
-      v-row.justify-space-between
+      v-row.justify-space-between.ma-0
         v-btn(text color="primary" to="/").mx-3
           span Home
           v-icon(small) mdi-arrow-left

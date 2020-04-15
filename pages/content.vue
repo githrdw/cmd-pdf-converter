@@ -13,7 +13,7 @@
                   span {{type.text}}
                   v-icon(small) {{type.icon}}
       v-bottom-navigation(absolute)
-        v-row.justify-space-between
+        v-row.justify-space-between.ma-0
           v-btn(text color="primary" to="source").mx-3
             span Source
             v-icon(small) mdi-arrow-left
