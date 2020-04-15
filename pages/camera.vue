@@ -9,17 +9,26 @@
           v-card(v-show="cameraReady").full-size
             video#camera.full-size
             canvas(v-show="false")#painting
+        
         #bottom-bar(v-if="cameras.length && loading")
           v-row.justify-space-between
-            v-btn(icon x-large @click="goBack" dark).ma-5.pa-6
-              v-icon(large color="white") mdi-arrow-left
-            v-btn(icon x-large dark @click="snapshot").ma-5.pa-6
-              v-icon(size="56") mdi-radiobox-marked
-            v-btn(icon x-large @click="switchCamera" dark).ma-5.pa-6
-              v-icon(large) mdi-video-switch
+            v-col
+              v-btn(icon x-large @click="goBack" dark)
+                v-icon(large color="white") mdi-arrow-left
+            v-col
+              v-btn(icon x-large dark @click="snapshot")
+                v-icon(size="56") mdi-radiobox-marked
+            v-col
+              v-btn(icon x-large @click="switchCamera" dark)
+                v-icon(large) mdi-video-switch
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState("file", ["source"])
+  },
   components: {},
   layout: "dense",
   data: () => ({
@@ -99,6 +108,7 @@ export default {
     }
   },
   mounted() {
+    if (!this.source) this.$router.push("/");
     if (navigator.mediaDevices.getUserMedia) {
       const media = navigator.mediaDevices;
       media.enumerateDevices().then(devices => {

@@ -7,7 +7,7 @@
       v-col(cols=12)
         v-row
           v-col(:cols="6" v-for="type in types" :key="type.text")
-            v-card(:to="{name: source, query: {content: type.value}}")
+            v-card(@click="next(type.value)")
               v-card-text
                 v-row.justify-space-around
                   span {{type.text}}
@@ -23,11 +23,11 @@
             v-icon(small) mdi-arrow-right
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   computed: {
-    source () {
-      return this.$route.query.source
-    }
+    ...mapState("file", ["source"])
   },
   data: () => ({
     types: [
@@ -52,6 +52,12 @@ export default {
         value: "photo"
       }
     ]
-  })
+  }),
+  methods: {
+    next(content) {
+      this.$store.commit("file/setContent", content);
+      this.$router.push({ name: this.source });
+    }
+  }
 };
 </script>

@@ -1,40 +1,30 @@
-<template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ error }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+<template lang="pug">
+  v-app(dark)
+    h1.text-center Well, that's awkward
+    v-card-text.text-center
+      p You just found a bug in this prototype. <br/>
+        | Please let us know the following error if you did not expect this error:
+      code {{error.message}}
+    v-card-actions.justify-center
+      v-btn(@click="reload" text) Reload
+      v-btn(to="/" color="primary") Home
 </template>
 
 <script>
 export default {
-  layout: 'empty',
+  layout: "empty",
   props: {
     error: {
       type: Object,
       default: null
     }
   },
-  data () {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
-  },
-  head () {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title
+  methods: {
+    reload() {
+      location.reload();
     }
   }
-}
+};
 </script>
 
 <style scoped>

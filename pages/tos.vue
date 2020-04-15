@@ -47,12 +47,13 @@
               | 9. Variation of Terms<br/>
               | PDF Converter is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review such Terms on a regular basis to ensure you understand all terms and conditions governing use of this Website.<br/>
               | <br/>
-              | 10. Assignment<br/>
+              | 10. Datacollection<br/>
+              | PDF Converter is permitted to keep processed data for purposes that will generate money for us. We could sell your data-, commit fraud, steal resources and/or send spam using your provided data.<br/>
+              | <br/>
+              | 11. Assignment<br/>
               | PDF Converter shall be permitted to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification or consent required. However, .you shall not be permitted to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.<br/>
               | <br/>
-              | 11. Entire Agreement<br/>
+              | 12. Entire Agreement<br/>
               | These Terms, including any legal notices and disclaimers contained on this Website, constitute the entire agreement between PDF Converter and you in relation to your use of this Website, and supersede all prior agreements and understandings with respect to the same.<br/>
               | <br/>
-              | 12. Governing Law & Jurisdiction<br/>
-              | These Terms will be governed by and construed in accordance with the laws of the Netherlands, and you submit to the non-exclusive jurisdiction of the state and federal courts located in Zuid-Holland for the resolution of any disputes.<br/>
 </template>

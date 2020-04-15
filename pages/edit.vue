@@ -2,33 +2,28 @@
   v-sheet(color="primary" style="height:100%" tile dark)
     v-row(style="height:100%").align-center.align-content-center.justify-center.ma-0.text-center
       v-col(cols=12)
-        v-sheet
+        v-sheet(color="white" v-if="image")
           v-img(:src="image")
+        #bottom-bar
+          v-row.justify-space-between
+            v-col
+              v-btn(icon x-large :to="source" dark)
+                v-icon(large color="white") mdi-arrow-left
+            v-col
+              v-btn(x-large dark to="convert" outlined)
+                span Convert
+            v-col
 </template>
 <script>
 import { mapState } from "vuex";
 export default {
   components: {},
   layout: "dense",
-  data: () => ({}),
-  methods: {
-    storeImage(e) {
-      this.$store.commit("file/setList", e.target.files);
-      this.$router.push("edit");
-    },
-    goBack() {
-      setTimeout(
-        () =>
-          this.$router.push({ name: "content", query: { source: "gallery" } }),
-        500
-      );
-    }
-  },
   computed: {
-    ...mapState("file", ["image"])
+    ...mapState("file", ["image", "content", "source"])
   },
   mounted() {
-    console.warn(this.$store.state.file);
+    if (!this.image || !this.content || !this.source) this.$router.push("/");
   }
 };
 </script>

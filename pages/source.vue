@@ -5,7 +5,7 @@
         h1 Step 1
         .sub-title What is the source of the file?
       v-col(cols=12 v-for="type in types" :key="type.text")
-        v-btn(block outlined color="primary" x-large :to="{name: 'content', query: {source: type.value}}")
+        v-btn(block outlined color="primary" x-large @click="next(type.value)")
           span {{type.text}}
           v-icon(right) {{type.icon}}
     v-bottom-navigation(absolute)
@@ -37,6 +37,12 @@ export default {
         value: "gallery"
       }
     ]
-  })
+  }),
+  methods: {
+    next(source) {
+      this.$store.commit("file/setSource", source);
+      this.$router.push({ name: "content" });
+    }
+  }
 };
 </script>
