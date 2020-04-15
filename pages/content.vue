@@ -7,7 +7,7 @@
       v-col(cols=12)
         v-row
           v-col(:cols="6" v-for="type in types" :key="type.text")
-            v-card(to="camera")
+            v-card(:to="{name: source, query: {content: type.value}}")
               v-card-text
                 v-row.justify-space-around
                   span {{type.text}}
@@ -33,19 +33,23 @@ export default {
     types: [
       {
         text: "ID-Card",
-        icon: "mdi-card-account-details"
+        icon: "mdi-card-account-details",
+        value: "id"
       },
       {
         text: "A4 document",
-        icon: "mdi-file-document"
+        icon: "mdi-file-document",
+        value: "a4"
       },
       {
         text: "Businesscard",
-        icon: "mdi-card-account-mail"
+        icon: "mdi-card-account-mail",
+        value: "businesscard"
       },
       {
         text: "Photo / other",
-        icon: "mdi-plus-box-multiple"
+        icon: "mdi-plus-box-multiple",
+        value: "photo"
       }
     ]
   })

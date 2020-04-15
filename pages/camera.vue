@@ -5,7 +5,6 @@
         v-progress-circular(indeterminate size=50)
           v-icon mdi-camera
       v-col.pa-0.full-size
-        //- v-sheet(v-if="aspectRatio === 'id'")#id Test
         v-scale-transition(origin="center center" leave-absolute)
           v-card(v-show="cameraReady").full-size
             video#camera.full-size
@@ -36,7 +35,11 @@ export default {
     goBack() {
       this.loading = false;
       this.cameraReady = false;
-      setTimeout(() => this.$router.push("content"), 500);
+      setTimeout(
+        () =>
+          this.$router.push({ name: "content", query: { source: "camera" } }),
+        500
+      );
     },
     switchCamera() {
       let { cameras, cameraIx } = this;
