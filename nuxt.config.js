@@ -17,6 +17,11 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  pwa: {
+    name: 'PDF Converter',
+    lang: 'en',
+    display: 'fullscreen'
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -25,11 +30,13 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '~/assets/windowHeight.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/windowHeight.js'
   ],
   /*
   ** Nuxt.js dev-modules

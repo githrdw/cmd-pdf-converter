@@ -5,7 +5,7 @@
         h1 Step 1
         .sub-title What is the source of the file?
       v-col(cols=12 v-for="type in types" :key="type.text")
-        v-btn(block outlined color="primary" x-large to="content")
+        v-btn(block outlined color="primary" x-large :to="{name: 'content', query: {source: type.value}}")
           span {{type.text}}
           v-icon(right) {{type.icon}}
     v-bottom-navigation(absolute)
@@ -13,7 +13,7 @@
         v-btn(text color="primary" to="/").mx-3
           span Home
           v-icon(small) mdi-arrow-left
-        v-btn(color="primary" to="content" disabled).mx-3
+        v-btn(color="primary" disabled).mx-3
           span Content
           v-icon(small) mdi-arrow-right
 </template>
@@ -28,11 +28,13 @@ export default {
     types: [
       {
         text: "Camera",
-        icon: "mdi-camera"
+        icon: "mdi-camera",
+        value: "camera"
       },
       {
         text: "Gallery",
-        icon: "mdi-image"
+        icon: "mdi-image",
+        value: "gallery"
       }
     ]
   })
