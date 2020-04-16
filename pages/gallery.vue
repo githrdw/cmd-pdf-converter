@@ -20,9 +20,14 @@ export default {
   methods: {
     storeImage(e) {
       const { files } = e.target;
-      const file = URL.createObjectURL(files[0]);
-      this.$store.commit("file/setImage", file);
-      this.$router.push("edit");
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        let file = reader.result;
+        file.substr(file.indexOf(",") + 1);
+        this.$store.commit("file/setImage", file);
+        this.$router.push("edit");
+      };
     },
     goBack() {
       setTimeout(
